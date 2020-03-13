@@ -1,18 +1,26 @@
-from telegram import TelegramObject
+import telebot
+from directories.translation_YA.translation import get_translate
+
+bot = telebot.TeleBot('')
 
 
-class LoginByUrl:
-    def __init__(self, url, forward_text=None, bot_username=None, request_write_access=None):
-        self.url = url
-        self.forward_text = forward_text
-        self.bot_username = bot_username
-        self.request_write_access = request_write_access
-        self.token = ''
-
-        self._id_attrs = (self.url,)
-
-    def lets_log(self):
-        start_log = f'{self.url}<{self.token}/getMe'
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Привет! С чего начнем? /help')
 
 
-Login = LoginByUrl('https://api.telegram.org/bot')
+@bot.message_handler(commands=['help'])
+def help_desk(message):
+    bot.send_message(message.chat.id, 'Вот функции с которыми я могу тебе помочь: /translate - перевод текста')
+
+
+@bot.message_handler(commands=['translate'])
+def translation_helper(message):
+    bot.send_message(message.chat.id, 'Что ты хочешь перевести? ')
+
+    @bot.message_handler(content_types=['text'])
+    def translation(message_to_translate):
+        bot.send_message(message.chat.id, f"Твой перевод - {get_translate(message_to_translate.text, 'en-ru')['text']}")
+
+
+bot.polling()
