@@ -1,7 +1,7 @@
 import telebot
 from Directories.Translation_YA.translation import *
 
-bot = telebot.TeleBot('YourTelegramAPI')
+bot = telebot.TeleBot('API_TELEGRAM')
 mode = 0
 lang = 'ru'
 statusd = 'close'
@@ -20,15 +20,18 @@ def help_user(message):
     bot.send_message(message.chat.id, 'Я - бот который поможет вам облегчить жизнь в контексте некоторых задач.\n'
                                       'Сейчас я умею переводить тексты на нужный вам язык.\n'
                                       'Но пока что, к сожалению не все на свете ;)\n'
-                                      'Команды - "Настроки", "translate"\n')
+                                      'Команды - "Настройки", "translate"\n')
 
 
-@bot.message_handler(content_types=['text'])
-def meeting_app(message):
-    bot.send_message(message.chat.id, 'У меня есть одна экспериментальная функция!\n'
-                                      'Я могу найти тебе собеседника по интересам, но к сожалению, '
-                                      'не в телеграмме.\n '
-                     )
+# @bot.message_handler(content_types=['text'])
+# def meeting_app(message):
+#     bot.send_message(message.chat.id, 'У меня есть одна экспериментальная функция!\n'
+#                                       'Я могу найти тебе собеседника по интересам, но к сожалению, '
+#                                       'не в телеграмме.\n '
+#                      )
+#     bot.send_message(message.chat.id, 'Привет! Ты хочешь найти себе пару?\n'
+#                                       'У меня есть кое-что для тебя, но для начала - познакомимся!\n')
+#     bot.send_message(message.chat.id, "Введите логин: ")
 
 
 @bot.message_handler(content_types=['text'])
@@ -41,15 +44,29 @@ def get_text_messages(message):
                                                'Переведено сервисом "Яндекс.Переводчик" - https://translate.yandex.ru\n'
                                                'Чтобы настроить перевод, используйте, пожалуйста - настройки\n')
     elif message.text.lower() == 'настройки':
-        bot.send_message(message.from_user.id, 'Перевод работает на нескольких языках, выберите на какой перевеодить\n'
-                                               'Доступные на данный момент: en, ru, uk(Украинский), is.\n'
+        bot.send_message(message.from_user.id, 'Перевод работает на нескольких языках,\n'
+                                               'на данный момент поддерживаются 10 самых популярных языков мира,\n'
+                                               'выберите на какой перевеодить.\n'
+                                               'Доступные на данный момент:\n '
+                                               'en(Английский), ru(Русский), uk(Украинский),\n'
+                                               'is(Исландский), zh(Китайский), hi(Хинди),\n'
+                                               'es(Испанский), ar(Арабский),bn(Бенгальский), \n'
+                                               'pt(Португальский), id(Индонезийский), fr(Французский).\n'
                                                'Введите один из них.\n')
         mode = 1
-    elif message.text.lower() == 'meeting' or message.text.lower == '/meeting':
-        meeting_app(message.text)
+    # elif message.text.lower() == 'meeting' or message.text.lower == '/meeting':
+    #     meeting_app(message.text)
     elif mode == 1 and message.text.lower() == 'en' \
+            or mode == 1 and message.text.lower() == 'hi' \
+            or mode == 1 and message.text.lower() == 'es' \
+            or mode == 1 and message.text.lower() == 'ar' \
+            or mode == 1 and message.text.lower() == 'bn' \
+            or mode == 1 and message.text.lower() == 'pt' \
+            or mode == 1 and message.text.lower() == 'id' \
+            or mode == 1 and message.text.lower() == 'fr' \
             or mode == 1 and message.text.lower() == 'is' \
             or mode == 1 and message.text.lower() == 'ru' \
+            or mode == 1 and message.text.lower() == 'zh' \
             or mode == 1 and message.text.lower() == 'uk':
         bot.send_message(message.from_user.id, f'Переключаю на {message.text.lower()}')
         lang = message.text.lower()
@@ -57,9 +74,20 @@ def get_text_messages(message):
     elif mode == 1 and message.text.lower() != 'en' \
             or mode == 1 and message.text.lower() != 'ru' \
             or mode == 1 and message.text.lower() != 'uk' \
-            or mode == 1 and message.text.lower() != 'is':
+            or mode == 1 and message.text.lower() != 'hi' \
+            or mode == 1 and message.text.lower() != 'es' \
+            or mode == 1 and message.text.lower() != 'ar' \
+            or mode == 1 and message.text.lower() != 'bn' \
+            or mode == 1 and message.text.lower() != 'pt' \
+            or mode == 1 and message.text.lower() != 'id' \
+            or mode == 1 and message.text.lower() != 'fr' \
+            or mode == 1 and message.text.lower() != 'is' \
+            or mode == 1 and message.text.lower() != 'zh':
         bot.send_message(message.from_user.id, 'Я не понял твой язык, введите другой.\n '
-                                               'ПОДДЕРЖИВАЕМЫЕ язык - en, ru, uk(Украинский), is.\n')
+                                               'ПОДДЕРЖИВАЕМЫЕ язык - en(Английский), ru(Русский), uk(Украинский),\n'
+                                               'is(Исландский), zh(Китайский), hi(Хинди),\n'
+                                               'es(Испанский), ar(Арабский),bn(Бенгальский), \n'
+                                               'pt(Португальский), id(Индонезийский), fr(Французский)..\n')
     else:
         bot.send_message(
             message.from_user.id, f'Ваш перевод - {get_translate(message.text.lower(), lang)["text"]}\n'
