@@ -1,6 +1,6 @@
 import requests
 from Directories.Translation_YA.settings import cfg
-token = 'API_YANDEX'
+token = cfg.yandex_api
 url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
 
 

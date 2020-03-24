@@ -1,13 +1,12 @@
 import telebot
+from Directories.Authorization.keyboard_buttons import keyboard as keyboard_btn
 from Directories.Translation_YA.translation import *
 
-bot = telebot.TeleBot('API_TELEGRAM')
+bot = telebot.TeleBot('837019930:AAFCyNv-WlgKQ-48dptM4rQSZ14_WxEoq5A')  # Введите свой токен
 mode = 0
 lang = 'ru'
 statusd = 'close'
 statusw = 'close'
-keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False)
-keyboard.row('Help', 'Настройки', 'meeting')
 
 
 @bot.message_handler(commands=['start'])
@@ -23,17 +22,6 @@ def help_user(message):
                                       'Команды - "Настройки", "translate"\n')
 
 
-# @bot.message_handler(content_types=['text'])
-# def meeting_app(message):
-#     bot.send_message(message.chat.id, 'У меня есть одна экспериментальная функция!\n'
-#                                       'Я могу найти тебе собеседника по интересам, но к сожалению, '
-#                                       'не в телеграмме.\n '
-#                      )
-#     bot.send_message(message.chat.id, 'Привет! Ты хочешь найти себе пару?\n'
-#                                       'У меня есть кое-что для тебя, но для начала - познакомимся!\n')
-#     bot.send_message(message.chat.id, "Введите логин: ")
-
-
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
     global mode, lang
@@ -47,15 +35,16 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, 'Перевод работает на нескольких языках,\n'
                                                'на данный момент поддерживаются 10 самых популярных языков мира,\n'
                                                'выберите на какой перевеодить.\n'
-                                               'Доступные на данный момент:\n '
-                                               'en(Английский), ru(Русский), uk(Украинский),\n'
-                                               'is(Исландский), zh(Китайский), hi(Хинди),\n'
-                                               'es(Испанский), ar(Арабский),bn(Бенгальский), \n'
-                                               'pt(Португальский), id(Индонезийский), fr(Французский).\n'
-                                               'Введите один из них.\n')
+                                               'Доступные на данный момент:\n'
+                                               '        en(Английский), ru(Русский),\n'
+                                               '        uk(Украинский), is(Исландский),\n'
+                                               '        zh(Китайский), hi(Хинди),\n'
+                                               '        es(Испанский), ar(Арабский),\n'
+                                               '        bn(Бенгальский), pt(Португальский),\n'
+                                               '        id(Индонезийский), fr(Французский).\n'
+                         )
+        bot.send_message(message.from_user.id, "Выберите нужный язык.", keyboard_btn())
         mode = 1
-    # elif message.text.lower() == 'meeting' or message.text.lower == '/meeting':
-    #     meeting_app(message.text)
     elif mode == 1 and message.text.lower() == 'en' \
             or mode == 1 and message.text.lower() == 'hi' \
             or mode == 1 and message.text.lower() == 'es' \
@@ -83,15 +72,16 @@ def get_text_messages(message):
             or mode == 1 and message.text.lower() != 'fr' \
             or mode == 1 and message.text.lower() != 'is' \
             or mode == 1 and message.text.lower() != 'zh':
-        bot.send_message(message.from_user.id, 'Я не понял твой язык, введите другой.\n '
-                                               'ПОДДЕРЖИВАЕМЫЕ язык - en(Английский), ru(Русский), uk(Украинский),\n'
+        bot.send_message(message.from_user.id, 'Я не понял твой язык, введите другой.\n'
+                                               'ПОДДЕРЖИВАЕМЫЕ язык: \n'
+                                               'en(Английский), ru(Русский), uk(Украинский),\n'
                                                'is(Исландский), zh(Китайский), hi(Хинди),\n'
-                                               'es(Испанский), ar(Арабский),bn(Бенгальский), \n'
-                                               'pt(Португальский), id(Индонезийский), fr(Французский)..\n')
+                                               'es(Испанский), ar(Арабский),bn(Бенгальский),\n'
+                                               'pt(Португальский), id(Индонезийский), fr(Французский).\n')
     else:
         bot.send_message(
             message.from_user.id, f'Ваш перевод - {get_translate(message.text.lower(), lang)["text"]}\n'
-                                  f' переведено сервисом "Яндекс.Переводчик" - https://translate.yandex.ru'
+                                  f'Переведено сервисом "Яндекс.Переводчик" - https://translate.yandex.ru'
         )
         bot.send_message(message.from_user.id, f'Сейчас я использую {lang}.\n'
                                                f'Если вы хотите изменить язык используйте - настройки.\n')
