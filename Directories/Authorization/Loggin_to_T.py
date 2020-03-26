@@ -1,11 +1,11 @@
 import telebot
 from Directories.Authorization.keyboard_buttons import keyboard
-from Directories.Authorization.settings import telegram_api
+from Directories.Authorization.settings_api import config
 from Directories.Translation_YA.translation import *
 import time
 
 
-bot = telebot.TeleBot(telegram_api)  # Введите свой токен
+bot = telebot.TeleBot(config["DEFAULT"]["Token"])  # Введите свой токен
 
     
 mode = 0
