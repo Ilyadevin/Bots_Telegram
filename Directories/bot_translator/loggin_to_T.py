@@ -1,11 +1,11 @@
-import telebot
-from Directories.Authorization.keyboard_buttons import keyboard
-from Directories.Authorization.settings_api import config
-from Directories.Translation_YA.translation import *
 import time
 
+import telebot
+from Directories.bot_translator.settings_api import config
+from Directories.bot_translator.keyboard_buttons import keyboard
+from Directories.translation_YA.translation import get_translate
 
-bot = telebot.TeleBot(config["DEFAULT"]["Token"])  # Введите свой токен
+bot = telebot.TeleBot(config["DEFAULT"]["token"])  # Введите свой токен
 
     
 mode = 0

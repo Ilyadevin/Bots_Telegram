@@ -1,3 +1,5 @@
 import configparser
+
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('test_data.ini')
+
