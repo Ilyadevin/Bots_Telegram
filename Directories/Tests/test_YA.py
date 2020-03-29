@@ -1,6 +1,6 @@
 import unittest
-from Directories.tests.settings_test import config
-from Directories.translation_YA.translation import get_translate
+from directories.tests.settings_test import config
+from directories.translation_YA.translation import get_translate
 from mock import patch
 
 

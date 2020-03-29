@@ -1,5 +1,5 @@
 import requests
-from Directories.translation_YA.settings_YA import config
+from directories.translation_YA.settings_YA import config
 
 token = config["DEFAULT"]["token"]
 url = "https://translate.yandex.net/api/v1.5/tr.json/translate"

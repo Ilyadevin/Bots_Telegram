@@ -1,7 +1,7 @@
 import time
 
 import telebot
-from Directories.bot_meeting_app.settings_M import config
+from directories.bot_meeting_app.settings_M import config
 
 bot = telebot.TeleBot(config["DEFAULT"]["token"])  # Введите свой токен
 
