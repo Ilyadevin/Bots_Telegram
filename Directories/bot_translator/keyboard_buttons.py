@@ -3,8 +3,6 @@ from telebot import types
 
 def keyboard():
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-
-    button_help = types.KeyboardButton('help')
     language_english = types.KeyboardButton('en')
     language_russian = types.KeyboardButton('ru')
     language_ukrainian = types.KeyboardButton('uk')
@@ -16,18 +14,19 @@ def keyboard():
     language_portuguese = types.KeyboardButton('pt')
     language_indonesian = types.KeyboardButton('id')
     language_french = types.KeyboardButton('fr')
-    markup.add(button_help,
-               language_english, language_russian, language_ukrainian,
-               language_icelandic, language_chinese, language_hindi,
-               language_arabic, language_bengal,
-               language_arabic, language_portuguese,
-               language_indonesian, language_french,
-               )
+    markup.add(
+        language_english, language_russian, language_ukrainian,
+        language_icelandic, language_chinese, language_hindi,
+        language_arabic, language_bengal,
+        language_arabic, language_portuguese,
+        language_indonesian, language_french,
+    )
     return markup
 
 
 def keyboard_settings():
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
     button_settings = types.KeyboardButton('Настройки')
-    markup.add(button_settings)
+    button_help = types.KeyboardButton('help')
+    markup.add(button_help, button_settings)
     return markup
