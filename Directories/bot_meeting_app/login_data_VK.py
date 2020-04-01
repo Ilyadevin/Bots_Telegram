@@ -27,6 +27,3 @@ def setting_user(message):
 
     except Exception as error_log:
         print(error_log)
-
-
-bot.polling(none_stop=True)

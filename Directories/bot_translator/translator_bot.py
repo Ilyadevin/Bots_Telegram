@@ -89,5 +89,3 @@ def get_text_messages(message):
     except Exception as error_in_text:
         print(error_in_text)
 
-
-bot.polling(none_stop=True)
