@@ -1,12 +1,16 @@
 from directories.bot_translator.loggin_to_T import *
 from directories.bot_translator.keyboard_buttons import keyboard, keyboard_settings
 from directories.translation_YA.translation import get_translate
+from directories.bot_translator.settings_api import config
+import telebot
+
 mode = 0
 lang = 'ru'
+bot = telebot.TeleBot(config['DEFAULT']['TOKEN'])  # Введите свой токен
 
 
 @bot.message_handler(content_types=['text'])
-def get_text_messages(message):
+def settings_translate_and_result(message):
     global mode, lang
     try:
         if message.text.lower() == 'translate' or message.text.lower == '/translate':
@@ -87,5 +91,4 @@ def get_text_messages(message):
             bot.send_message(message.from_user.id, f'Сейчас я использую {lang}.\n'
                                                    f'Если вы хотите изменить язык используйте - настройки.\n')
     except Exception as error_in_text:
-        print(error_in_text)
-
+        bot.send_message(message.from_user.id, error_in_text)

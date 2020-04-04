@@ -1,10 +1,6 @@
 import time
-
-import telebot
-from directories.bot_translator.settings_api import config
+from directories.bot_translator.translation import *
 from directories.bot_translator.keyboard_buttons import keyboard_settings
-
-bot = telebot.TeleBot(config['DEFAULT']['TOKEN'])  # Введите свой токен
 
 statusd = 'close'
 statusw = 'close'
@@ -32,6 +28,7 @@ def help_user(message):
                                           "WARNING - I'm using Russian Language as main\n",
                          reply_markup=keyboard_settings()
                          )
+        settings_translate_and_result()
     except Exception as error_in_command:
         bot.send_message(message.chat.id, error_in_command)
 
