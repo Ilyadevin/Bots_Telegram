@@ -37,6 +37,7 @@ def keyboard_settings_meeting():
     button_settings = types.KeyboardButton('Настройки')
     button_help = types.KeyboardButton('/help')
     button_meeting = types.KeyboardButton('Meet')
+    button_info=types.ReplyKeyboardMarkup('info')
     markup.add(button_help,
                button_settings,
                button_meeting)

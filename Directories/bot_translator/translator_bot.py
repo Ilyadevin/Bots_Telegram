@@ -1,6 +1,6 @@
 from directories.bot_translator.loggin_to_T import *
 from directories.bot_translator.keyboard_buttons import keyboard, keyboard_settings
-
+from directories.translation_YA.translation import get_translate
 mode = 0
 lang = 'ru'
 
