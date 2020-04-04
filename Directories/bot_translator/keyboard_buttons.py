@@ -26,7 +26,7 @@ def keyboard():
 
 def keyboard_settings():
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-    button_settings = types.KeyboardButton('Настройки')
+    button_settings = types.KeyboardButton('settings')
     button_help = types.KeyboardButton('/help')
     markup.add(button_help, button_settings)
     return markup
@@ -34,11 +34,18 @@ def keyboard_settings():
 
 def keyboard_settings_meeting():
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-    button_settings = types.KeyboardButton('Настройки')
+    button_settings = types.KeyboardButton('settings')
     button_help = types.KeyboardButton('/help')
     button_meeting = types.KeyboardButton('Meet')
-    button_info=types.ReplyKeyboardMarkup('info')
+    button_info = types.ReplyKeyboardMarkup('info')
     markup.add(button_help,
                button_settings,
-               button_meeting)
+               button_meeting,
+               button_info)
     return markup
+
+
+def wiki_settings():
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+    button_wiki_settings = types.KeyboardButton('wiki func')
+    return markup.add(button_wiki_settings)

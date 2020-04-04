@@ -1,7 +1,5 @@
-import time
 from directories.bot_translator.translation import *
-from directories.bot_translator.keyboard_buttons import keyboard_settings
-
+from directories.wikifunc.wikipedia_help import *
 statusd = 'close'
 statusw = 'close'
 
@@ -31,6 +29,17 @@ def help_user(message):
         settings_translate_and_result()
     except Exception as error_in_command:
         bot.send_message(message.chat.id, error_in_command)
+
+
+@bot.message_handler(commands=['wiki'])
+def wiki_check(message):
+    try:
+        time.sleep(1)
+        bot.send_message(message.chat.id, 'Here some func of wiki request\n'
+                                          'You give me the word and give you a link\n')
+        getting_link()
+    except Exception as error:
+        bot.send_message(message.chat.id, error)
 
 
 @bot.message_handler(commands=['info'])

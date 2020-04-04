@@ -1,12 +1,8 @@
-from directories.bot_translator.loggin_to_T import *
-from directories.bot_translator.keyboard_buttons import keyboard, keyboard_settings
 from directories.translation_YA.translation import get_translate
-from directories.bot_translator.settings_api import config
-import telebot
+from directories.bot_translator.settings_api import *
 
 mode = 0
 lang = 'ru'
-bot = telebot.TeleBot(config['DEFAULT']['TOKEN'])  # Введите свой токен
 
 
 @bot.message_handler(content_types=['text'])
@@ -15,33 +11,30 @@ def settings_translate_and_result(message):
     try:
         if message.text.lower() == 'translate' or message.text.lower == '/translate':
             time.sleep(1)
-            bot.send_message(message.from_user.id, 'Привет ещё раз ;)\n'
+            bot.send_message(message.from_user.id, 'Hi there again\n'
                                                    '\n'
-                                                   'Я бот - который переводит слова и тексты,\n'
-                                                   'напиши мне что ты хочешь перевести и я сделаю это!\n'
+                                                   'Write me the word and I will translate it to you!\n'
                                                    '\n'
-                                                   'Переведено сервисом "Яндекс.Переводчик" - '
+                                                   'Translated with "Яндекс.Переводчик" - '
                                                    'https://translate.yandex.ru\n '
-                                                   'Чтобы настроить перевод, используйте, пожалуйста - настройки\n'
+                                                   'To change the mode of translation use "settings"\n'
                                                    '\n', reply_markup=keyboard_settings())
-        elif message.text.lower() == 'настройки':
+        elif message.text.lower() == 'settings':
             time.sleep(2)
-            bot.send_message(message.from_user.id, 'Перевод работает на нескольких языках.\n'
+            bot.send_message(message.from_user.id, 'Translation work on a few languages\n'
                                                    '\n'
-                                                   'На данный момент поддерживаются 10 самых популярных языков мира,\n'
+                                                   'For now I use only 10 most popular languages,\n'
                                                    '\n'
-                                                   'Доступные на данный момент:\n'
-                                                   '\n'
-                                                   '        en(Английский), ru(Русский),\n'
-                                                   '        uk(Украинский), is(Исландский),\n'
-                                                   '        zh(Китайский), hi(Хинди),\n'
-                                                   '        es(Испанский), ar(Арабский),\n'
-                                                   '        bn(Бенгальский), pt(Португальский),\n'
-                                                   '        id(Индонезийский), fr(Французский).\n'
+                                                   '        en(English), ru(Russian), \n '
+                                                   '        uk (Ukrainian), is (Icelandic), \n'
+                                                   '        zh (Chinese), hi (Hindi), \n'
+                                                   '        es (Spanish), ar (Arabic), \n'
+                                                   '        bn (Bengali), pt (Portuguese), \n'
+                                                   '        id (Indonesian), fr (French). \n'
                                                    '\n',
                              reply_markup=keyboard()
                              )
-            bot.send_message(message.from_user.id, "Выберите нужный язык.", keyboard())
+            bot.send_message(message.from_user.id, "Choose the language.", keyboard())
             mode = 1
         elif mode == 1 and message.text.lower() == 'en' \
                 or mode == 1 and message.text.lower() == 'hi' \
@@ -56,7 +49,7 @@ def settings_translate_and_result(message):
                 or mode == 1 and message.text.lower() == 'zh' \
                 or mode == 1 and message.text.lower() == 'uk':
             time.sleep(2)
-            bot.send_message(message.from_user.id, f'Переключаю на {message.text.lower()}')
+            bot.send_message(message.from_user.id, f'Changed to {message.text.lower()}')
             lang = message.text.lower()
             mode = 0
         elif mode == 1 and message.text.lower() != 'en' \
@@ -72,23 +65,24 @@ def settings_translate_and_result(message):
                 or mode == 1 and message.text.lower() != 'is' \
                 or mode == 1 and message.text.lower() != 'zh':
             time.sleep(2)
-            bot.send_message(message.from_user.id, 'Я не понял твой язык, введите другой.\n'
-                                                   'ПОДДЕРЖИВАЕМЫЕ язык: \n'
+            bot.send_message(message.from_user.id, 'I don`t understand you,\n'
+                                                   'Please, use another language\n'
                                                    '\n'
-                                                   '        en(Английский), ru(Русский),\n'
-                                                   '        uk(Украинский),is(Исландский),\n'
-                                                   '        zh(Китайский), hi(Хинди),\n'
-                                                   '        ar(Арабский),bn(Бенгальский),\n'
-                                                   '        pt(Португальский), id(Индонезийский),\n'
-                                                   '        es(Испанский),  fr(Французский).\n'
+                                                   '        en(English), ru(Russian), \n '
+                                                   '        uk (Ukrainian), is (Icelandic), \n'
+                                                   '        zh (Chinese), hi (Hindi), \n'
+                                                   '        es (Spanish), ar (Arabic), \n'
+                                                   '        bn (Bengali), pt (Portuguese), \n'
+                                                   '        id (Indonesian), fr (French). \n'
                                                    '\n')
         else:
             time.sleep(2)
             bot.send_message(
-                message.from_user.id, f'Ваш перевод - {get_translate(message.text.lower(), lang)["text"]}\n'
-                                      f'Переведено сервисом "Яндекс.Переводчик" - https://translate.yandex.ru'
+                message.from_user.id, f'Your translation - {get_translate(message.text.lower(), lang)["text"]}\n'
+                                      'Translated with "Яндекс.Переводчик" - \n'
+                                      'https://translate.yandex.ru\n '
             )
-            bot.send_message(message.from_user.id, f'Сейчас я использую {lang}.\n'
-                                                   f'Если вы хотите изменить язык используйте - настройки.\n')
+            bot.send_message(message.from_user.id, f'For now I use {lang}.\n'
+                                                   f'If you want to change it - use settings\n')
     except Exception as error_in_text:
         bot.send_message(message.from_user.id, error_in_text)
