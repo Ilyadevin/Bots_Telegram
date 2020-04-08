@@ -9,5 +9,6 @@ def getting_link(message):
         time.sleep(2)
         bot.send_message(message.from_user.id, wikipedia.page(f'https://en.wikipedia.org/wiki/{message.text.lower()}'))
     except wikipedia.exceptions.DisambiguationError as error_in_link:
-        bot.send_message(message.from_user.id, error_in_link)
+        bot.send_message(message.from_user.id, f'There is an unexpected error:\n'
+                                               f'{error_in_link}')
         bot.send_message(message.from_user, 'DisambiguationError: The page name is ambiguous')

@@ -14,8 +14,13 @@ def settings_translate_and_result(message):
                                                    '\n'
                                                    'Write me the word and I will translate it to you!\n'
                                                    '\n'
-                                                   'Translated with "Яндекс.Переводчик" - '
-                                                   'https://translate.yandex.ru\n '
+                                                   'I can translate the word/text or something else\n'
+                                                   'On two different platforms:\n'
+                                                   'Google.Translate and YandexTranslator\n'
+                                                   'Translated with "Google.Translate" - \n'
+                                                   'https://translate.google.com/?hl=ru,\n'
+                                                   'Translated with "Яндекс.Переводчик" - \n'
+                                                   'https://translate.yandex.ru,\n '
                                                    'To change the mode of translation use "settings"\n'
                                                    '\n', reply_markup=keyboard_settings())
         elif message.text.lower() == 'settings':

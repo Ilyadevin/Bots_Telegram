@@ -18,10 +18,15 @@ def help_user(message):
     try:
         time.sleep(1)
         bot.send_message(message.chat.id, 'I can help you with some tasks.\n'
+                                          '\n'
                                           'Now I can translate texts into the language you need.\n'
                                           'Not everything in the world ;)\n'
-                                          'Commands - "Settings" , "translate"\n'
-                                          "WARNING - I'm using Russian Language as main\n",
+                                          '\n'
+                                          'Commands - "Settings" , "translate", "wiki"\n'
+                                          "WARNING - I'm using Russian Language as main\n"
+                                          '\n'
+                                          "As for Wiki-functions - you can write something\n"
+                                          "So I`ll give you a link to article about it\n",
                          reply_markup=keyboard_settings()
                          )
         settings_translate_and_result()
@@ -47,6 +52,7 @@ def info(message):
                         "For now it`s giving you the translation of the words you need.\n"
                         "Later I will add new functions.\n"
                         "If you have some advices let me know on:\n"
+                        "\n"
                         "https://t.me/erlihigh\n"
                         "https://github.com/Ilyadevin\n"
                         "Good Luck!", reply_markup=keyboard_settings()
