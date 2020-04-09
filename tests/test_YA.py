@@ -1,11 +1,13 @@
 import unittest
 from func_packages.translation_YA.translation import get_translate
 from mock import patch
+from tests.settings_test import config_yandex
 
 
 class MyTestCase(unittest.TestCase):
 
     def setUp(self):
+        self.configuration_token = config_yandex
         self.example_translation = {'text': 'Привет', 'lang': 'ru-en'}
         self.example_wrong_text = {'text': "апыаппрварпсгеси щшгпр"}
 
@@ -20,15 +22,13 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(result_translate['text'], 'Hi')
 
     def test_block_api(self):
-        with patch('translation.yandex.token',
-                   'trnsl.1.1.20200112T140716Z.9ca7a8bb2b2ad11d.10e4b240b91295583261820c95ec7170673e8f08') as _:
+        with patch(self.configuration_token) as _:
             result = get_translate(self.example_translation['text'],
                                    self.example_translation['lang'])['code']
             self.assertTrue(result, 402)
 
     def test_wrong_api(self):
-        with patch('translation.yandex.token',
-                   'trnsl.1.1.20200116T113731Z.94c83123351e649f.67da2d35fd69ce49b44b425c101fb32a83e578c7') as _:
+        with patch(self.configuration_token.join('1234567')) as _:
             result = get_translate(self.example_translation['text'],
                                    self.example_translation['lang'])['code']
             self.assertTrue(result, 401)
