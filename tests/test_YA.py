@@ -39,4 +39,5 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(result['code'], 422)
 
 
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()

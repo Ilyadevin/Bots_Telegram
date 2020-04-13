@@ -1,14 +1,4 @@
-from conf_packages.settings_for_all import *
-import wikipedia
 
-
-@bot.message_handler(content_types='text')
-def getting_link(message):
-    bot.send_message(message.from_user.id, f'Searching Wikipedia for {message.text}')
-    try:
-        time.sleep(2)
-        bot.send_message(message.from_user.id, wikipedia.page(f'https://en.wikipedia.org/wiki/{message.text.lower()}'))
-    except wikipedia.exceptions.DisambiguationError as error_in_link:
-        bot.send_message(message.from_user.id, f'There is an unexpected error:\n'
-                                               f'{error_in_link}')
-        bot.send_message(message.from_user, 'DisambiguationError: The page name is ambiguous')
+def getting_link(text_from_user):
+    link = f'https://en.wikipedia.org/wiki/{text_from_user.text.lower()}'
+    return link

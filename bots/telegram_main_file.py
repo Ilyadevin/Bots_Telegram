@@ -1,5 +1,5 @@
 from bots.bot_translator.translation import *
-from func_packages.wiki_func.wikipedia_help import *
+from bots.wiki_bot_func.wiki_link import *
 
 
 @bot.message_handler(commands=['start'])
@@ -40,7 +40,7 @@ def wiki_check(message):
         time.sleep(1)
         bot.send_message(message.chat.id, 'Here some func of wiki request\n'
                                           'You give me the word and give you a link\n')
-        getting_link()
+        link_to_user()
     except Exception as error:
         bot.send_message(message.chat.id, error)
 
