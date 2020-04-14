@@ -57,3 +57,6 @@ def info(message):
                         "https://github.com/Ilyadevin\n"
                         "Good Luck!", reply_markup=keyboard_settings()
                         )
+    bot.send_message(message.chat.id, 'Also you can help me with development\n'
+                                      'Just contact me with those methods above\n'
+                                      'Thanks for using my bot :)')
