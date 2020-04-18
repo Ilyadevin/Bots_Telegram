@@ -14,7 +14,3 @@ class TestsCases(unittest.TestCase):
 
     def test_case_wrong(self):
         self.assertEqual(getting_link(self.wrong_data), self.wrong_data)
-
-
-if __name__ == '__main__':
-    unittest.main()

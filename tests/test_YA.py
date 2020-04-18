@@ -37,7 +37,3 @@ class MyTestCase(unittest.TestCase):
         result = get_translate(self.example_wrong_text['text'],
                                self.example_translation['lang'])
         self.assertTrue(result['code'], 422)
-
-
-if __name__ == '__main__':
-    unittest.main()

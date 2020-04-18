@@ -10,7 +10,3 @@ class TestMockBot(unittest.TestCase):
 
     def test_start(self):
         self.assertEqual(start_message('start'), 'Hello there! /help?')
-
-
-if __name__ == '__main__':
-    unittest.main()
