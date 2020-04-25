@@ -5,11 +5,12 @@ import time
 import wikipedia
 from conf_packages.keyboard_buttons import *
 import os
+import wikipedia
 statusd = 'close'
 statusw = 'close'
 mode = 0
 list_of_log_data = []
-
+lang = 'ru'
 
 def yandex_c():
     config_ya = configparser.ConfigParser()
