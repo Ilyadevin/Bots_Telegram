@@ -1,13 +1,13 @@
 import unittest
 from func_packages.translation_YA.translation import get_translate
 from mock import patch
-from tests.settings_test import config_yandex
+from tests.settings_test import test_config_yandex
 
 
 class MyTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.configuration_token = config_yandex
+        self.configuration_token = test_config_yandex
         self.example_translation = {'text': 'Привет', 'lang': 'ru-en'}
         self.example_wrong_text = {'text': "апыаппрварпсгеси щшгпр"}
 

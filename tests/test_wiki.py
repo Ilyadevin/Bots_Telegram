@@ -8,11 +8,11 @@ class TestsCases(unittest.TestCase):
         self.wrong_data = 'sidufhgoisuhfg'
 
     def test_link(self):
-        self.assertEqual(self.test_data_requests[1], str())
+        for index in self.test_data_requests:
+            self.assertTrue(getting_link(index), True)
 
-    def test_case_wrong(self):
-        test_case = getting_link(self.wrong_data)
-        self.assertEqual(test_case, 'https://en.wikipedia.org/wiki/')
+    def another_test(self):
+        self.assertFalse(getting_link(self.wrong_data), True)
 
 
 if __name__ == '__main__':
