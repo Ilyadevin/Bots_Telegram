@@ -1,6 +1,6 @@
 import requests
-from conf_packages.settings_for_all import yandex_c
-token = yandex_c()
+from conf_packages.settings_for_all import yandex_token_settings
+token = yandex_token_settings
 url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
 
 
