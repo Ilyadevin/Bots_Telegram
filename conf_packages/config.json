@@ -1,0 +1,10 @@
+[
+  {
+    "telegram_api": "837019930:AAFqvhQvuSJ4KbdSQgwrpVxR5iwqtzZIfqY",
+    "yandex_api": "trnsl.1.1.20200328T163033Z.f4042c658559a62e.49edfe4bc90d1db9282e7abe9359ceff6a1b15e8",
+    "google_settings": [
+            "translate.google.com",
+            "translate.google.co.kr"
+                        ]
+  }
+]
